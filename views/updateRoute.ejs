@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <%- include("./partials/head") %>
+  <link rel="stylesheet" href="/css/newRoute.css" />
+
+  <body class="page-container">
+    <%- include("./partials/header") %>
+    <main class="content">
+      <div class="form-container">
+        <h2 style="margin-bottom: 20px">Изменить маршрут</h2>
+        <form
+          id="newRouteForm"
+          action="/editRoute/<%= route.id %>"
+          enctype="multipart/form-data"
+          method="POST"
+          novalidate
+        >
+          <label for="name">Название маршрута:</label>
+          <input
+            type="text"
+            id="name"
+            name="newRouteForm[name]"
+            class="input-field form-control"
+            value="<%= route.name %>"
+            required
+          />
+          <div class="error-message" id="name-error">
+            Пожалуйста, введите название.
+          </div>
+
+          <label for="description">Описание:</label>
+          <textarea
+            id="description"
+            name="newRouteForm[description]"
+            class="input-field form-control"
+            rows="4"
+            required
+          >
+<%= route.description %></textarea
+          >
+          <div class="error-message" id="description-error">
+            Пожалуйста, введите описание.
+          </div>
+
+          <label for="descriptionFull">Описание:</label>
+          <textarea
+            id="descriptionFull"
+            name="newRouteForm[descriptionFull]"
+            class="input-field form-control"
+            rows="4"
+            required
+          >
+<%= route.descriptionFull %></textarea
+          >
+          <div class="error-message" id="descriptionFull-error">
+            Пожалуйста, введите полное описание.
+          </div>
+
+          <label for="iframeCode">Код карты (iframe):</label>
+          <textarea
+            id="iframeCode"
+            name="newRouteForm[iframeCode]"
+            class="input-field form-control"
+            rows="4"
+          >
+<%= route.iframeCode %></textarea
+          >
+          <div class="error-message" id="iframeCode-error">
+            Пожалуйста, введите код карты.
+          </div>
+          <label for="photo">Прикрепить фотографию:</label>
+          <div class="file-upload">
+            <button
+              type="button"
+              onclick="document.getElementById('photo').click()"
+              class="upload-button"
+            >
+              <i class="bi bi-images"></i> Выбрать фото
+            </button>
+            <input
+              type="file"
+              id="photo"
+              name="photo"
+              accept="image/*"
+              class="input-field form-control"
+              style="display: none"
+            />
+            <div id="file-list">
+              <img
+                class="existingPhoto"
+                src="/uploads/<%= route.photo %>"
+                alt="Photo"
+              />
+            </div>
+          </div>
+          <div class="error-message" id="photo-error" style="margin-top: 10px">
+            Пожалуйста, добавьте фотографию.
+          </div>
+
+          <input
+            type="submit"
+            value="Изменить"
+            class="cta-button animate__animated"
+          />
+        </form>
+      </div>
+    </main>
+    <%- include("./partials/footer") %> <%- include("./partials/script") %>
+    <script src="/js/newRoute1.js"></script>
+  </body>
+</html>

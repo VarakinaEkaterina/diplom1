@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <%- include("./partials/head") %>
+  <link rel="stylesheet" href="/css/reviews.css" />
+
+  <body class="page-container">
+    <%- include("./partials/header") %>
+    <main class="content">
+      <div class="form-container">
+        <h2>Ваш отзыв</h2>
+        <form
+          id="reviewsAttractionForm"
+          action="/reviews/reviewsAttraction"
+          enctype="multipart/form-data"
+          method="POST"
+          novalidate
+        >
+          <label for="attraction">Достопримечательность:</label>
+          <!-- prettier-ignore-start -->
+          <select id="attraction" name="reviewsAttractionForm[attraction]" class="select input-field form-control">
+            <option value="">Выберите достопримечательность</option>
+            <% landmarks.forEach(landmark => { %>
+              <option value="<%= landmark.id %>" <%= landmark.id == selectedLandmarkId ? 'selected' : '' %>><%= landmark.name %></option>
+            <% }); %>
+          </select>
+          <!-- prettier-ignore-end -->
+          
+          <div class="error-message" id="attraction-error">
+            Пожалуйста, выберите достопримечательность.
+          </div>
+
+          <label>Ваша оценка:</label>
+          <div class="rating" id="rating">
+            <input
+              type="radio"
+              id="star5"
+              name="reviewsAttractionForm[rating]"
+              value="5"
+            /><label for="star5">★</label>
+            <input
+              type="radio"
+              id="star4"
+              name="reviewsAttractionForm[rating]"
+              value="4"
+            /><label for="star4">★</label>
+            <input
+              type="radio"
+              id="star3"
+              name="reviewsAttractionForm[rating]"
+              value="3"
+            /><label for="star3">★</label>
+            <input
+              type="radio"
+              id="star2"
+              name="reviewsAttractionForm[rating]"
+              value="2"
+            /><label for="star2">★</label>
+            <input
+              type="radio"
+              id="star1"
+              name="reviewsAttractionForm[rating]"
+              value="1"
+            /><label for="star1">★</label>
+          </div>
+          <div class="error-message" id="rating-error" style="display: none;">
+            Пожалуйста, выберите оценку.
+          </div>
+
+          <label for="photo">Прикрепить фотографии (не более 5):</label>
+          <div class="file-upload">
+            <button
+              type="button"
+              onclick="document.getElementById('photo').click()"
+              class="upload-button"
+            >
+              <i class="bi bi-images"></i> Выбрать файлы
+            </button>
+            <input
+              type="file"
+              id="photo"
+              name="photos"
+              accept="image/*"
+              class="input-field form-control"
+              style="display: none"
+              multiple
+            />
+            <div id="file-list"></div>
+          </div>
+          <div class="error-message" id="photo-error" style="display: none; margin-top: 5px;">
+            Вы можете загрузить не более 5 фотографий.
+          </div>
+
+
+          <label for="message">Сообщение:</label>
+          <textarea
+            id="message"
+            name="reviewsAttractionForm[message]"
+            class="input-field form-control"
+            rows="4"
+            required
+          ></textarea>
+          <div class="error-message" id="message-error">
+            Пожалуйста, напишите комментарий.
+          </div>
+
+          <input
+            type="submit"
+            value="Отправить"
+            class="cta-button animate__animated"
+          />
+        </form>
+      </div>
+    </main>
+    <%- include("./partials/footer") %> <%- include("./partials/script") %>
+    <script src="/js/reviews.js"></script>
+  </body>
+</html>

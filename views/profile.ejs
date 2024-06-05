@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <%- include("./partials/head") %>
+  <link rel="stylesheet" href="/css/profile.css" />
+
+  <body class="page-container">
+    <%- include("./partials/header") %>
+    <main class="content">
+      <% if (!locals.user) { %>
+
+      <div class="form-container">
+        <h2 style="text-align: center">Войти в профиль</h2>
+        <form id="loginForm" action="/profile" method="POST" novalidate>
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="loginForm[email]"
+            class="input-field form-control"
+            required
+          />
+          <div class="error-message" id="email-error">
+            Пожалуйста, введите действующий адрес электронной почты.
+          </div>
+
+          <label for="password" class="form-label">Пароль</label>
+          <input
+            type="password"
+            class="input-field form-control"
+            id="password"
+            name="loginForm[password]"
+            required
+          />
+          <div class="error-message" id="password-error">
+            Пожалуйста, введите ваш пароль.
+          </div>
+
+          <% if (validationError && validationError.field === 'password') { %>
+          <p class="text-danger"><%= validationError.message %></p>
+          <% } %>
+
+          <input
+            type="submit"
+            value="Войти"
+            class="cta-button animate__animated"
+          />
+        </form>
+        <label for="registr-link" class="form-label"
+          >Если у вас еще нет аккаунта, нажмите кнопку
+          зарегистрироваться.</label
+        >
+        <a href="/profile/register" class="registr-link" id="registr-link">
+          <button class="registr cta-button animate__animated">
+            Зарегистрироваться
+          </button>
+        </a>
+      </div>
+      <% } else { %>
+      <div class="user-info">
+        <span class="user-name">Здравствуйте, <%= locals.user.name %></span>
+        <% if (user.role === 'admin') { %>
+        <span class="user-name">У вас есть права администратора</span>
+        <a href="/admin/editMainPage" class="btn btn-warning editmain"
+          >Редактировать главную страницу</a
+        >
+        <% } %>
+        <a href="/logout" class="logout-button">Выйти</a>
+      </div>
+      <% if (user.role === 'admin') { %>
+      <div class="user-posts">
+        <h3 style="width: 100%">Отзывы:</h3>
+        <% [...adminReviews, ...adminRouteReviews].forEach((review) => { %>
+        <div class="review-item1">
+          <p>
+            <% if (review.Landmark) { %> Достопримечательность:
+            <a
+              style="text-decoration: none; color: #ffa400"
+              href="/landmarks/<%= review.Landmark.id %>"
+              ><%= review.Landmark.name %></a
+            >
+            <% } else if (review.Route) { %> Маршрут:
+            <a
+              style="text-decoration: none; color: #ffa400"
+              href="/routes/<%= review.Route.id %>"
+              ><%= review.Route.name %></a
+            >
+            <% } else { %>
+            <span>Данные недоступны</span>
+            <% } %>
+          </p>
+          <p>
+            Отзыв от пользователя: <strong><%= review.User.name %></strong> (<%=
+            review.User.email %>)
+          </p>
+          <p>Оценка: <%= review.rating %></p>
+          <p>Комментарий: <%= review.message %></p>
+          <div class="review-item-photos">
+            <% let p = review.ReviewPhotos || review.ReviewRoutePhotos; %> <% if
+            (p && p.length > 0) { %> <% p.forEach((p) => { %>
+            <img
+              src="/uploads/<%= p.path %>"
+              alt="Фото отзыва"
+              class="review-item-photo"
+            />
+            <% }); %> <% } %>
+          </div>
+          <div class="review-item-actions">
+            <% if (review.Landmark) { %>
+            <form
+              action="/reviews/approve/landmarks/<%= review.id %>"
+              method="post"
+            >
+              <button class="approve-button" type="submit">Опубликовать</button>
+            </form>
+            <form
+              action="/reviews/reject/landmarks/<%= review.id %>"
+              method="post"
+            >
+              <button class="reject-button" type="submit">Отклонить</button>
+            </form>
+
+            <% } else if (review.Route) { %>
+            <form
+              action="/reviews/approve/routes/<%= review.id %>"
+              method="post"
+            >
+              <button class="approve-button" type="submit">Опубликовать</button>
+            </form>
+            <form
+              action="/reviews/reject/routes/<%= review.id %>"
+              method="post"
+            >
+              <button class="reject-button" type="submit">Отклонить</button>
+            </form>
+            <% } else { %>
+            <span>Данные недоступны</span>
+            <% } %>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+
+      <div class="user-posts">
+        <h3 style="width: 100%">Обратная связь:</h3>
+        <% adminFeedback.forEach((feedback) => { %>
+        <div class="feedback-item">
+          <div>
+            <p>Имя: <strong><%= feedback.name %></strong></p>
+            <p>Email: <strong><%= feedback.email %></strong></p>
+            <p>Оценка: <%= feedback.rating %></p>
+          </div>
+          <p>Комментарий: <%= feedback.message %></p>
+        </div>
+        <% }); %>
+      </div>
+      <% } else { %>
+      <div class="user-posts">
+        <h3 style="width: 100%">Вам понравилось:</h3>
+        <div class="user-posts-list">
+          <% if (landmarks.length > 0 || routes.length > 0) { %> <%
+          landmarks.forEach((item) => { %>
+          <a
+            href="/landmarks/<%= item.id %>"
+            class="card-link"
+            style="text-decoration: none; color: inherit"
+          >
+            <div class="card">
+              <div class="card-content">
+                <div>
+                  <img
+                    src="/uploads/<%= item.photo %>"
+                    alt="<%= item.name %>"
+                  />
+                </div>
+                <div class="card-description">
+                  <h2><%= item.name %></h2>
+                  <p><%= item.description %></p>
+                </div>
+                <button
+                  class="like-button"
+                  aria-label="Like"
+                  data-id="<%= item.id %>"
+                  data-type="landmarks"
+                >
+                  <i
+                    class="bi bi-suit-heart-fill<%= item.likedByCurrentUser ? ' red-heart' : '' %>"
+                  ></i>
+                </button>
+              </div>
+            </div>
+          </a>
+          <% }) %> <% routes.forEach((item) => { %>
+          <a
+            href="/routes/<%= item.id %>"
+            class="card-link"
+            style="text-decoration: none; color: inherit"
+          >
+            <div class="card">
+              <div class="card-content">
+                <div>
+                  <img
+                    src="/uploads/<%= item.photo %>"
+                    alt="<%= item.name %>"
+                  />
+                </div>
+                <div class="card-description">
+                  <h2><%= item.name %></h2>
+                  <p><%= item.description %></p>
+                </div>
+                <button
+                  class="like-button"
+                  aria-label="Like"
+                  data-id="<%= item.id %>"
+                  data-type="route"
+                >
+                  <i
+                    class="bi bi-suit-heart-fill<%= item.likedByCurrentUser ? ' red-heart' : '' %>"
+                  ></i>
+                </button>
+              </div>
+            </div>
+          </a>
+          <% }) %> <% } else { %>
+          <p style="color: rgb(203, 203, 203); text-align: center">
+            У вас пока нет избранного
+          </p>
+          <% } %>
+        </div>
+      </div>
+
+      <div class="user-posts">
+        <h3 style="width: 100%">Ваши отзывы:</h3>
+        <% if (userReviews.length > 0 || userRouteReviews.length > 0) { %>
+        <div class="user-reviews-list">
+          <% [...userReviews, ...userRouteReviews].forEach((review) => { %>
+          <div class="review-item">
+            <div class="review-item2">
+              <div class="review-item-status">
+                <p class="status" data-status="<%= review.status %>">
+                  <%= review.status %>
+                </p>
+              </div>
+              <div class="review-item-content">
+                <p>
+                  <% if (review.Landmark) { %> Достопримечательность:
+                  <a
+                    style="text-decoration: none; color: #ffa400"
+                    href="/landmarks/<%= review.Landmark.id %>"
+                    ><%= review.Landmark.name %></a
+                  >
+                  <% } else if (review.Route) { %> Маршрут:
+                  <a
+                    style="text-decoration: none; color: #ffa400"
+                    href="/routes/<%= review.Route.id %>"
+                    ><%= review.Route.name %></a
+                  >
+                  <% } else { %>
+                  <span>Данные недоступны</span>
+                  <% } %>
+                </p>
+                <p>Ваша оценка: <%= review.rating %></p>
+                <p>Ваш комментарий: <%= review.message %></p>
+
+                <% if (locals.user && locals.user.id === review.userId) { %>
+                <div class="review-item-action">
+                  <% let reviewTypePath = review.Landmark ? 'landmarks' :
+                  'routes'; %>
+                  <form
+                    action="/reviews/edit/<%= reviewTypePath %>/<%= review.id %>"
+                    method="get"
+                  >
+                    <button type="submit" class="editButton">Изменить</button>
+                  </form>
+                  <form
+                    action="/reviews/delete/<%= reviewTypePath %>/<%= review.id %>"
+                    method="post"
+                  >
+                    <button type="submit" class="deleteButton">Удалить</button>
+                  </form>
+                </div>
+                <% } %>
+              </div>
+            </div>
+            <div class="review-item-photos">
+              <% let photos = review.ReviewPhotos || review.ReviewRoutePhotos;
+              %> <% if (photos && photos.length > 0) { %> <%
+              photos.forEach((photo) => { %>
+              <img
+                src="/uploads/<%= photo.path %>"
+                alt="Фото отзыва"
+                class="review-item-photo"
+              />
+              <% }); %> <% } %>
+            </div>
+          </div>
+          <% }); %>
+        </div>
+        <% } else { %>
+        <p style="color: rgb(203, 203, 203); text-align: center">
+          Вы пока не оставляли комментарии
+        </p>
+        <% } %>
+      </div>
+
+      <% } %> <% } %>
+    </main>
+    <%- include("./partials/footer") %> <%- include("./partials/script") %>
+    <script src="/js/profile.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var likeButtons = document.querySelectorAll(".like-button");
+        likeButtons.forEach(function (button) {
+          button.addEventListener("click", function (event) {
+            event.stopPropagation();
+            event.preventDefault();
+            var icon = button.querySelector(".bi-suit-heart-fill");
+            var landmarksId = button.getAttribute("data-id");
+            var type = button.getAttribute("data-type");
+
+            if (icon.classList.contains("grey-heart")) {
+              fetch(`/like-${type}/${landmarksId}`, {
+                method: "POST",
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  icon.classList.remove("grey-heart");
+                })
+                .catch((error) => console.error("Error:", error));
+            } else {
+              fetch(`/unlike-${type}/${landmarksId}`, {
+                method: "DELETE",
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  icon.classList.add("grey-heart");
+                })
+                .catch((error) => console.error("Error:", error));
+            }
+          });
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        var statusElements = document.querySelectorAll(
+          ".review-item-status .status"
+        );
+
+        statusElements.forEach(function (element) {
+          var status = element.getAttribute("data-status");
+          switch (status) {
+            case "approved":
+              element.innerHTML = '<i class="bi bi-check-lg"></i>';
+              element.style.color = "green";
+              element.style.fontWeight = "bold";
+              element.style.fontSize = "30px";
+              break;
+            case "rejected":
+              element.innerHTML = '<i class="bi bi-x-lg"></i>';
+              element.style.color = "red";
+              element.style.fontWeight = "bold";
+              element.style.fontSize = "30px";
+              break;
+            default:
+              element.innerHTML = '<i class="bi bi-hourglass-split"></i>';
+              element.style.color = "grey";
+              element.style.fontWeight = "bold";
+              element.style.fontSize = "30px";
+              break;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

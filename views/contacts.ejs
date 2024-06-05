@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <%- include("./partials/head") %>
+  <link rel="stylesheet" href="/css/contacts.css" />
+
+  <body class="page-container">
+    <%- include("./partials/header") %>
+    <main class="content">
+      <div class="container">
+        <h2 style="text-align: center">Где нас найти?</h2>
+        <h4>Адрес компании:</h4>
+        <p class="contactItem">г. Выборг, ул. Крепостная, д. 1</p>
+        <h4>Часы работы:</h4>
+        <p class="contactItem">Понедельник - Пятница: 9:00 - 18:00</p>
+        <p class="contactItem">Суббота: 10:00 - 16:00</p>
+        <p class="contactItem">Воскресенье: выходной</p>
+        <h4>Контактные телефоны:</h4>
+        <p class="contactItem">+7 (495) 123-45-67</p>
+        <p class="contactItem">+7 (800) 123-45-67</p>
+        <h4>Электронная почта:</h4>
+        <p class="contactItem">info@company.ru</p>
+        <h4>Социальные сети:</h4>
+        <div class="social-media">
+          <p class="contactItem">
+            <a class="contactA" href="https://www.vk.com/" target="_blank"
+              >VK</a
+            >
+          </p>
+          <p class="contactItem">
+            <a class="contactA" href="https://web.telegram.org/" target="_blank"
+              >Telegram</a
+            >
+          </p>
+        </div>
+        <div>
+          <h4>Наше местоположение:</h4>
+          <p style="text-align: center">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1951.7127547855187!2d28.727402676990888!3d60.7137378994468!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x469732522d1bedf7%3A0x593367b671a0567!2z0JrRgNC10L_QvtGB0YLQvdCw0Y8g0YPQuy4sIDEsINCS0YvQsdC-0YDQsywg0JvQtdC90LjQvdCz0YDQsNC00YHQutCw0Y8g0L7QsdC7LiwgMTg4ODAw!5e0!3m2!1sru!2sru!4v1716274699384!5m2!1sru!2sru"
+              width="600"
+              height="450"
+              style="border: 0; border-radius: 10px"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </p>
+        </div>
+      </div>
+      <div class="container">
+        <h2>Ваше мнение важно для нас!</h2>
+        <p>
+          Мы стремимся предоставлять вам лучший сервис и продукты. Ваши отзывы и
+          предложения помогают нам улучшаться. Пожалуйста, выберите один из
+          следующих вариантов, чтобы поделиться своим мнением:
+        </p>
+
+        <h3>Оставить отзыв</h3>
+        <p>
+          Не упустите возможность поделиться вашими впечатлениями о маршрутах и
+          достопримечательностях. Ваши отзывы помогут другим пользователям
+          сделать правильный выбор.
+        </p>
+        <a href="/contacts/reviews" class="a cta-button animate__animated"
+          >Оставить отзыв</a
+        >
+
+        <h3>Обратная связь</h3>
+        <p>
+          У вас есть идеи, как мы можем стать лучше? Наткнулись на проблему на
+          нашем сайте? Заполните форму обратной связи, и мы учтем ваше мнение
+          при дальнейшей работе.
+        </p>
+        <a href="/contacts/feedback" class="a cta-button animate__animated"
+          >Заполнить форму обратной связи</a
+        >
+
+        <p>
+          Мы ценим ваше время и стремление помочь нам. Спасибо за вашу
+          активность и поддержку!
+        </p>
+      </div>
+    </main>
+    <%- include("./partials/footer") %> <%- include("./partials/script") %>
+  </body>
+</html>

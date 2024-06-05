@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <%- include("./partials/head") %>
+  <link rel="stylesheet" href="/css/editMainPage.css" />
+
+  <body class="page-container">
+    <%- include("./partials/header") %>
+    <main class="content">
+      <div class="form-container">
+        <h2>Редактирование главной страницы</h2>
+        <form id="mainForm" action="/admin/editMainPage" method="POST" enctype="multipart/form-data">
+            <h3>Карусель фотографий</h3>
+            <div class="carousel-container">
+              <div class="carousel-item1">
+              <label for="carouselPhoto1">Прикрепить фотографию 1:</label>
+              <div class="file-upload">
+                <button
+                  type="button"
+                  onclick="document.getElementById('carouselPhoto1').click()"
+                  class="upload-button"
+                >
+                  <i class="bi bi-images"></i> Выбрать фото
+                </button>
+                <input
+                  type="file"
+                  id="carouselPhoto1"
+                  name="carouselPhoto1"
+                  accept="image/*"
+                  class="input-field form-control"
+                  style="display: none"
+                />
+                <div id="file-list1">
+                  <img
+                    class="existingPhoto"
+                    src="/uploads/<%= mainPage.carouselPhoto1 %>"
+                    alt="Photo"
+                  />
+                </div>
+              </div>
+              <div class="error-message" id="photo1-error" style="margin-top: 10px">
+                Пожалуйста, добавьте фотографию.
+              </div>
+            </div>
+            <div class="carousel-item1">
+              <label for="carouselTitle1">Заголовок 1:</label>
+              <input type="text" id="carouselTitle1" name="carouselTitle1" class="input-field form-control" value="<%= mainPage ? mainPage.carouselTitle1 : '' %>">
+            </div>
+            <div class="error-message" id="carouselTitle1-error">
+              Пожалуйста, введите заголовок.
+            </div>
+            <div class="carousel-item1">
+              <label for="carouselSubtitle1">Подзаголовок 1:</label>
+              <input type="text" id="carouselSubtitle1" name="carouselSubtitle1" class="input-field form-control" value="<%= mainPage ? mainPage.carouselSubtitle1 : '' %>">
+            </div>
+            <div class="error-message" id="carouselSubtitle1-error">
+              Пожалуйста, введите подзаголовок.
+            </div>
+            </div>
+            
+            <div class="carousel-container">
+              <div class="carousel-item1">
+              <label for="carouselPhoto2">Прикрепить фотографию 2:</label>
+              <div class="file-upload">
+                <button
+                  type="button"
+                  onclick="document.getElementById('carouselPhoto2').click()"
+                  class="upload-button"
+                >
+                  <i class="bi bi-images"></i> Выбрать фото
+                </button>
+                <input
+                  type="file"
+                  id="carouselPhoto2"
+                  name="carouselPhoto2"
+                  accept="image/*"
+                  class="input-field form-control"
+                  style="display: none"
+                />
+                <div id="file-list2">
+                  <img
+                    class="existingPhoto"
+                    src="/uploads/<%= mainPage.carouselPhoto2 %>"
+                    alt="Photo"
+                  />
+                </div>
+              </div>
+              <div class="error-message" id="photo2-error" style="margin-top: 10px">
+                Пожалуйста, добавьте фотографию.
+              </div>
+            </div>
+            <div class="carousel-item1">
+              <label for="carouselTitle2">Заголовок 2:</label>
+              <input type="text" id="carouselTitle2" name="carouselTitle2" class="input-field form-control" value="<%= mainPage ? mainPage.carouselTitle2 : '' %>">
+            </div>
+            <div class="error-message" id="carouselTitle2-error">
+              Пожалуйста, введите заголовок.
+            </div>
+            <div class="carousel-item1">
+              <label for="carouselSubtitle2">Подзаголовок 2:</label>
+              <input type="text" id="carouselSubtitle2" name="carouselSubtitle2" class="input-field form-control" value="<%= mainPage ? mainPage.carouselSubtitle2 : '' %>">
+            </div>
+            <div class="error-message" id="carouselSubtitle2-error">
+              Пожалуйста, введите подзаголовок.
+            </div>
+            </div>
+
+            <div class="carousel-container">
+              <div class="carousel-item1">
+              <label for="carouselPhoto3">Прикрепить фотографию 3:</label>
+              <div class="file-upload">
+                <button
+                  type="button"
+                  onclick="document.getElementById('carouselPhoto3').click()"
+                  class="upload-button"
+                >
+                  <i class="bi bi-images"></i> Выбрать фото
+                </button>
+                <input
+                  type="file"
+                  id="carouselPhoto3"
+                  name="carouselPhoto3"
+                  accept="image/*"
+                  class="input-field form-control"
+                  style="display: none"
+                />
+                <div id="file-list3">
+                  <img
+                    class="existingPhoto"
+                    src="/uploads/<%= mainPage.carouselPhoto3 %>"
+                    alt="Photo"
+                  />
+                </div>
+              </div>
+              <div class="error-message" id="photo3-error" style="margin-top: 10px">
+                Пожалуйста, добавьте фотографию.
+              </div>
+            </div>
+            <div class="carousel-item1">
+              <label for="carouselTitle3">Заголовок 3:</label>
+              <input type="text" id="carouselTitle3" name="carouselTitle3" class="input-field form-control" value="<%= mainPage ? mainPage.carouselTitle3 : '' %>">
+            </div>
+            <div class="error-message" id="carouselTitle3-error">
+              Пожалуйста, введите заголовок.
+            </div>
+            <div class="carousel-item1">
+              <label for="carouselSubtitle3">Подзаголовок 3:</label>
+              <input type="text" id="carouselSubtitle3" name="carouselSubtitle3" class="input-field form-control" value="<%= mainPage ? mainPage.carouselSubtitle3 : '' %>">
+            </div>
+            <div class="error-message" id="carouselSubtitle3-error">
+              Пожалуйста, введите подзаголовок.
+            </div>
+            </div>
+            
+            <h3>Карточки маршрутов</h3>
+            <div class="carousel-container">
+              <label for="routeCard1Id">Маршрут 1:</label>
+              <select id="routeCard1Id" name="routeCard1Id" class="select input-field form-control">
+                <% routes.forEach(route => { %>
+                  <option value="<%= route.id %>" <%= mainPage && mainPage.routeCard1Id === route.id ? 'selected' : '' %>><%= route.name %></option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="carousel-container">
+              <label for="routeCard2Id">Маршрут 2:</label>
+              <select id="routeCard2Id" name="routeCard2Id" class="select input-field form-control">
+                <% routes.forEach(route => { %>
+                  <option value="<%= route.id %>" <%= mainPage && mainPage.routeCard2Id === route.id ? 'selected' : '' %>><%= route.name %></option>
+                <% }) %>
+              </select>
+            </div>
+            <div class="carousel-container">
+              <label for="routeCard3Id">Маршрут 3:</label>
+              <select id="routeCard3Id" name="routeCard3Id" class="select input-field form-control">
+                <% routes.forEach(route => { %>
+                  <option value="<%= route.id %>" <%= mainPage && mainPage.routeCard3Id === route.id ? 'selected' : '' %>><%= route.name %></option>
+                <% }) %>
+              </select>
+            </div>
+            
+            <input type="submit" value="Отправить" class="cta-button animate__animated" />
+          </form>
+          
+        </div>
+    </main>
+    <%- include("./partials/footer") %> <%- include("./partials/script") %>
+    <script src="/js/main.js"></script>
+  </body>
+</html>
+

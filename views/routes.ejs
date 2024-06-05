@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <%- include("./partials/head") %>
+  <link rel="stylesheet" href="/css/routes.css" />
+
+  <body class="page-container">
+    <%- include("./partials/header") %>
+    <main class="content">
+      <% if (user && user.role === 'admin') { %>
+      <div class="addDiv">
+        <a href="/newRoute">
+          <button class="add">
+            <i class="bi bi-plus-square-fill"></i></button
+        ></a>
+      </div>
+      <% routes.forEach((route) => { %>
+      <a
+        href="/routes/<%= route.id %>"
+        class="card-link"
+        style="text-decoration: none; color: inherit"
+      >
+        <div class="card">
+          <div class="card-content">
+            <div>
+              <img src="/uploads/<%= route.photo %>" alt="<%= route.name %>" />
+            </div>
+            <div class="card-description">
+              <h2><%= route.name %></h2>
+              <p><%= route.description %></p>
+              <% if (route.reviews && route.reviews.length) { %>
+              <p>Средний рейтинг: <%= route.averageRating.toFixed(2) %></p>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </a>
+      <% }) %> <% } else if ( user && user.role === 'user') { %> <%
+      routes.forEach((route) => { %>
+      <a
+        href="/routes/<%= route.id %>"
+        class="card-link"
+        style="text-decoration: none; color: inherit"
+      >
+        <div class="card">
+          <div class="card-content">
+            <div>
+              <img src="/uploads/<%= route.photo %>" alt="<%= route.name %>" />
+            </div>
+            <div class="card-description">
+              <h2><%= route.name %></h2>
+              <p><%= route.description %></p>
+              <% if (route.reviews && route.reviews.length) { %>
+              <p>Средний рейтинг: <%= route.averageRating.toFixed(2) %></p>
+              <% } %>
+              <!-- <p>
+                <button class="button-link">
+                  <a href="<%= route.externalLink %>" target="_blank"
+                    >Ознакомиться подробнее</a
+                  >
+                </button>
+              </p> -->
+            </div>
+            <button
+              class="like-button"
+              aria-label="Like"
+              data-id="<%= route.id %>"
+            >
+              <i
+                class="bi bi-suit-heart-fill<%= route.likedByCurrentUser ? ' red-heart' : '' %>"
+              ></i>
+            </button>
+          </div>
+        </div>
+      </a>
+      <% }) %> <% } else { %> <% routes.forEach((route) => { %>
+      <a
+        href="/routes/<%= route.id %>"
+        class="card-link"
+        style="text-decoration: none; color: inherit"
+      >
+        <div class="card">
+          <div class="card-content">
+            <div>
+              <img src="/uploads/<%= route.photo %>" alt="<%= route.name %>" />
+            </div>
+            <div class="card-description">
+              <h2><%= route.name %></h2>
+              <p><%= route.description %></p>
+              <% if (route.reviews && route.reviews.length) { %>
+              <p>Средний рейтинг: <%= route.averageRating.toFixed(2) %></p>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </a>
+      <% }) %> <% } %>
+    </main>
+    <%- include("./partials/footer") %> <%- include("./partials/script") %>
+    <script>
+      tippy(".add", {
+        content: "Добавить маршрут",
+        placement: "bottom",
+        animation: "perspective-extreme",
+        offset: [0, -7],
+      });
+      tippy(".like-button", {
+        content: "Добавить в избранное",
+        placement: "bottom",
+        animation: "perspective-extreme",
+        offset: [0, 13],
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var likeButtons = document.querySelectorAll(".like-button");
+        likeButtons.forEach(function (button) {
+          button.addEventListener("click", function (event) {
+            event.stopPropagation();
+            event.preventDefault();
+            var icon = button.querySelector(".bi-suit-heart-fill");
+            var routeId = button.getAttribute("data-id");
+
+            if (icon.classList.contains("red-heart")) {
+              fetch(`/unlike-route/${routeId}`, {
+                method: "DELETE",
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  icon.classList.remove("red-heart");
+                })
+                .catch((error) => console.error("Error:", error));
+            } else {
+              fetch(`/like-route/${routeId}`, {
+                method: "POST",
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  icon.classList.add("red-heart");
+                })
+                .catch((error) => console.error("Error:", error));
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

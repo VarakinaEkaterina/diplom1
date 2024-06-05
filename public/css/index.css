@@ -1,0 +1,205 @@
+body {
+  font-family: "Montserrat", Arial;
+  font-weight: 800;
+}
+
+.best-routes-section {
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  background-color: #f5f5f5;
+}
+
+.subheading {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffa400;
+}
+
+.heading-container {
+  max-width: 600px;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border: solid 3px #000000;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  border-radius: 3px;
+}
+
+.heading-container h1 {
+  font-size: 30px;
+  color: #333;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.heading-container p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.routes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-around;
+}
+
+.route {
+  min-width: 300px;
+  max-width: 600px;
+  height: 400px;
+  background-color: #f5f5f5;
+  padding: 0px;
+  text-align: center;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  border-radius: 3px;
+  border: 1px solid #000000;
+}
+
+.card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 3px;
+}
+
+.card-front {
+  background-color: #ffffff;
+}
+
+.card-back {
+  background-color: #ffffff;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.route-image {
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 10px;
+  border-bottom: #000000 solid 1px;
+}
+
+.route h3,
+.card-back h3 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.route p,
+.card-back p {
+  font-size: 16px;
+  color: #666;
+}
+
+.card:hover {
+  border: 1px solid #ffa400;
+  box-shadow: 0px 0px 0px 2px #ffa400;
+}
+
+.call-to-action {
+  text-align: center;
+  color: #333;
+  font-size: 20px;
+  margin-top: 50px;
+}
+
+.cta-button {
+  background-color: #fff;
+  color: #ffa400;
+  border: solid 3px #ffa400;
+  border-radius: 3px;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.cta-button:hover {
+  background-color: #ffa400;
+  color: #fff;
+}
+
+.info-section {
+  position: relative;
+  background-color: #f5f5f500;
+  padding: 40px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.into-info-section {
+  position: relative;
+  max-width: 600px;
+  background-color: #00000082;
+  padding: 20px;
+  border: solid 3px #ffffff;
+  border-radius: 3px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.into-info-section p a {
+  color: #ffa400;
+  text-decoration: none;
+}
+
+.into-info-section p a:hover {
+  color: #b87800;
+}
+
+.info-section h2 {
+  font-size: 30px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.info-section p {
+  font-size: 16px;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.parallax {
+  background-image: url("/images/bg.jpg");
+  min-height: 400px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  z-index: 0;
+}
+
+.card-front h3 {
+  margin: 30px;
+}

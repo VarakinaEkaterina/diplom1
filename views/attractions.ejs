@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <%- include("./partials/head") %>
+  <link rel="stylesheet" href="/css/attractions.css" />
+
+  <body class="page-container">
+    <%- include("./partials/header") %>
+    <main class="content">
+      <% if (user && user.role === 'admin') { %>
+      <div class="addDiv">
+        <a href="/newLandmarks">
+          <button class="add">
+            <i class="bi bi-plus-square-fill"></i></button
+        ></a>
+      </div>
+      <div class="sortDiv">
+        <label for="sortType"><i class="bi bi-funnel" style="font-size: 25px;"></i></label>
+        <select id="sortType">
+            <option value="default" <%= sortType === 'default' ? 'selected' : '' %>>Все достопримечательности</option>
+            <option value="type1" <%= sortType === 'type1' ? 'selected' : '' %>>Здания (сооружения)</option>
+            <option value="type2" <%= sortType === 'type2' ? 'selected' : '' %>>Музеи</option>
+            <option value="type3" <%= sortType === 'type3' ? 'selected' : '' %>>Памятники</option>
+            <option value="type4" <%= sortType === 'type4' ? 'selected' : '' %>>Соборы</option>
+            <option value="type5" <%= sortType === 'type5' ? 'selected' : '' %>>Площади</option>
+            <option value="type6" <%= sortType === 'type6' ? 'selected' : '' %>>Парки</option>
+            <option value="type7" <%= sortType === 'type7' ? 'selected' : '' %>>Библиотеки</option>
+        </select>
+    </div>    
+      <% landmarks.forEach((landmarks) => { %>
+      <a
+        href="/landmarks/<%= landmarks.id %>"
+        class="card-link"
+        style="text-decoration: none; color: inherit"
+      >
+        <div class="card">
+          <div class="card-content">
+            <div>
+              <img
+                src="/uploads/<%= landmarks.photo %>"
+                alt="<%= landmarks.name %>"
+              />
+            </div>
+            <div class="card-description">
+              <h2><%= landmarks.name %></h2>
+              <p><%= landmarks.description %></p>
+              <% if (landmarks.reviews && landmarks.reviews.length) { %>
+              <p>Средний рейтинг: <%= landmarks.averageRating.toFixed(2) %></p>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </a>
+      <% }) %> <% } else if ( user && user.role === 'user') { %>
+        <div class="sortDiv">
+          <label for="sortType"><i class="bi bi-funnel" style="font-size: 25px;"></i></label>
+          <select id="sortType">
+              <option value="default" <%= sortType === 'default' ? 'selected' : '' %>>Все достопримечательности</option>
+              <option value="type1" <%= sortType === 'type1' ? 'selected' : '' %>>Здания (сооружения)</option>
+              <option value="type2" <%= sortType === 'type2' ? 'selected' : '' %>>Музеи</option>
+              <option value="type3" <%= sortType === 'type3' ? 'selected' : '' %>>Памятники</option>
+              <option value="type4" <%= sortType === 'type4' ? 'selected' : '' %>>Соборы</option>
+              <option value="type5" <%= sortType === 'type5' ? 'selected' : '' %>>Площади</option>
+              <option value="type6" <%= sortType === 'type6' ? 'selected' : '' %>>Парки</option>
+              <option value="type7" <%= sortType === 'type7' ? 'selected' : '' %>>Библиотеки</option>
+          </select>
+      </div>
+      <% landmarks.forEach((landmarks) => { %>
+      <a
+        href="/landmarks/<%= landmarks.id %>"
+        class="card-link"
+        style="text-decoration: none; color: inherit"
+      >
+        <div class="card">
+          <div class="card-content">
+            <div>
+              <img
+                src="/uploads/<%= landmarks.photo %>"
+                alt="<%= landmarks.name %>"
+              />
+            </div>
+            <div class="card-description">
+              <h2><%= landmarks.name %></h2>
+              <p><%= landmarks.description %></p>
+              <% if (landmarks.reviews && landmarks.reviews.length) { %>
+              <p>Средний рейтинг: <%= landmarks.averageRating.toFixed(2) %></p>
+              <% } %>
+            </div>
+            <button
+              class="like-button"
+              aria-label="Like"
+              data-id="<%= landmarks.id %>"
+            >
+              <i
+                class="bi bi-suit-heart-fill<%= landmarks.likedByCurrentUser ? ' red-heart' : '' %>"
+              ></i>
+            </button>
+          </div>
+        </div>
+      </a>
+      <% }) %> <% } else { %> 
+        <div class="sortDiv">
+          <label for="sortType"><i class="bi bi-funnel" style="font-size: 25px;"></i></label>
+          <select id="sortType">
+              <option value="default" <%= sortType === 'default' ? 'selected' : '' %>>Все достопримечательности</option>
+              <option value="type1" <%= sortType === 'type1' ? 'selected' : '' %>>Здания (сооружения)</option>
+              <option value="type2" <%= sortType === 'type2' ? 'selected' : '' %>>Музеи</option>
+              <option value="type3" <%= sortType === 'type3' ? 'selected' : '' %>>Памятники</option>
+              <option value="type4" <%= sortType === 'type4' ? 'selected' : '' %>>Соборы</option>
+              <option value="type5" <%= sortType === 'type5' ? 'selected' : '' %>>Площади</option>
+              <option value="type6" <%= sortType === 'type6' ? 'selected' : '' %>>Парки</option>
+              <option value="type7" <%= sortType === 'type7' ? 'selected' : '' %>>Библиотеки</option>
+          </select>
+      </div>
+        <% landmarks.forEach((landmarks) => { %>
+      <a
+        href="/landmarks/<%= landmarks.id %>"
+        class="card-link"
+        style="text-decoration: none; color: inherit"
+      >
+        <div class="card">
+          <div class="card-content">
+            <div>
+              <img
+                src="/uploads/<%= landmarks.photo %>"
+                alt="<%= landmarks.name %>"
+              />
+            </div>
+            <div class="card-description">
+              <h2><%= landmarks.name %></h2>
+              <p><%= landmarks.description %></p>
+              <% if (landmarks.reviews && landmarks.reviews.length) { %>
+              <p>Средний рейтинг: <%= landmarks.averageRating.toFixed(2) %></p>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </a>
+      <% }) %> <% } %>
+    </main>
+    <%- include("./partials/footer") %> <%- include("./partials/script") %>
+    <script>
+      tippy(".add", {
+        content: "Добавить достопримечательность",
+        placement: "bottom",
+        animation: "perspective-extreme",
+        offset: [0, -7],
+      });
+      tippy(".like-button", {
+        content: "Добавить в избранное",
+        placement: "bottom",
+        animation: "perspective-extreme",
+        offset: [0, 13],
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        document
+          .getElementById("sortType")
+          .addEventListener("change", function () {
+            const selectedType = this.value;
+            window.location.href = `/attractions?sortType=${selectedType}`;
+          });
+
+        var likeButtons = document.querySelectorAll(".like-button");
+        likeButtons.forEach(function (button) {
+          button.addEventListener("click", function (event) {
+            event.stopPropagation();
+            event.preventDefault();
+            var icon = button.querySelector(".bi-suit-heart-fill");
+            var landmarksId = button.getAttribute("data-id");
+            if (icon.classList.contains("red-heart")) {
+              fetch(`/unlike-landmarks/${landmarksId}`, {
+                method: "DELETE",
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  icon.classList.remove("red-heart");
+                })
+                .catch((error) => console.error("Error:", error));
+            } else {
+              fetch(`/like-landmarks/${landmarksId}`, {
+                method: "POST",
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  icon.classList.add("red-heart");
+                })
+                .catch((error) => console.error("Error:", error));
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

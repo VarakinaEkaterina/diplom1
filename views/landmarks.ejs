@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <%- include("./partials/head") %>
+  <link rel="stylesheet" href="/css/landmarks.css" />
+
+  <body>
+    <%- include("./partials/header") %>
+    <main>
+      <div class="landmark">
+        <% if (landmarks.photo) { %> <% } %>
+        <div class="landmark-info">
+          <h1>
+            <div class="landmark-photo">
+              <img
+                src="/uploads/<%= landmarks.photo %>"
+                alt="<%= landmarks.name %>"
+              />
+            </div>
+            <%= landmarks.name %>
+          </h1>
+          <p><%= landmarks.description %></p>
+          <p>
+            <span class="rating">Рейтинг:</span> <%= averageRating.toFixed(2) %>
+          </p>
+          <% if (typeof user !== 'undefined' && user.role === 'admin') { %>
+          <div class="admin-buttons">
+            <form method="GET" action="/edit/<%= landmarks.id %>">
+              <button type="submit" class="editButton">Редактировать</button>
+            </form>
+            <form
+              method="POST"
+              action="/delete/<%= landmarks.id %>"
+              onsubmit="return confirmDelete()"
+            >
+              <button type="submit" class="deleteButton">Удалить</button>
+            </form>
+          </div>
+          <% } %>
+        </div>
+        <div class="landmark-info2">
+          <p class="full-description"><%- formattedDescriptionFull %></p>
+        <div class="share">
+          <h3>Хотите поделиться впечатлениями об этом месте?</h3>
+          <button
+            onclick="window.location.href='/reviews/reviewsAttraction?landmarkId=<%= landmarks.id %>';"
+          >
+            Оставить комментарий
+          </button>
+        </div>
+      </div>
+
+      <div class="reviews">
+        <h3>Отзывы:</h3>
+        <% if (reviews.length === 0) { %>
+        <p style="text-align: center; color: #b3b3b3; font-size: 20px">
+          Отзывов пока нет
+        </p>
+        <% } else { %> <% reviews.forEach(function(review) { %>
+        <div class="review-details">
+          <div class="review-info">
+            <h4><span>Пользователь:</span> <%= review.User.name %></h4>
+            <p><span>Оценка: </span><%= review.rating %></p>
+            <p><span>Комментарий: </span><%= review.message %></p>
+            <% if (typeof user !== 'undefined' && user.role === 'admin') { %>
+            <form
+              method="POST"
+              action="/reviews/delete/landmarks/<%= review.id %>"
+              style="display: inline"
+            >
+              <button
+                type="submit"
+                class="delete-button"
+                title="Удалить комментарий"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </form>
+            <% } %>
+          </div>
+          <div class="review-photos">
+            <% review.ReviewPhotos.forEach(function(photo) { %>
+            <img
+              src="/uploads/<%= photo.path %>"
+              alt="Фото отзыва"
+              style="margin: 10px"
+            />
+            <% }); %>
+          </div>
+        </div>
+        <% }); %> <% } %>
+      </div>
+    </main>
+    <%- include("./partials/footer") %> <%- include("./partials/script") %>
+    <script>
+      function confirmDelete() {
+        return confirm("Вы уверены, что хотите удалить достопримечательность?");
+      }
+    </script>
+  </body>
+</html>

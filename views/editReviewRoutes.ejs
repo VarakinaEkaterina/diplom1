@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <%- include("./partials/head") %>
+  <link rel="stylesheet" href="/css/reviews.css" />
+
+  <body class="page-container">
+    <%- include("./partials/header") %>
+    <main class="content">
+      <div class="form-container">
+        <h2>Ваш отзыв</h2>
+        <form
+          id="reviewsRouteForm"
+          action="/reviews/edit/routes/<%= review.id %>"
+          enctype="multipart/form-data"
+          method="POST"
+          novalidate
+        >
+          <label for="route">Маршрут:</label>
+          <!-- prettier-ignore-start -->
+          <select id="route" name="reviewsRouteForm[route]" class="select input-field form-control" disabled>
+            <% routes.forEach(route => { %>
+              <option value="<%= route.id %>" <%= route.id == review.routeId ? 'selected' : '' %>><%= route.name %></option>
+            <% }); %>
+          </select>
+          <input type="hidden" name="reviewsRouteForm[route]" value="<%= review.routeId %>" />
+          
+          <!-- prettier-ignore-end -->
+          
+          <div class="error-message" id="route-error">
+            Пожалуйста, выберите маршрут.
+          </div>
+
+          <label>Ваша оценка:</label>
+          <div class="rating" id="rating">
+            <% [5, 4, 3, 2, 1].forEach(star => { %>
+              <input type="radio" id="star<%= star %>" name="reviewsRouteForm[rating]" value="<%= star %>" <%= review.rating === star ? 'checked' : '' %> />
+              <label for="star<%= star %>">★</label>
+            <% }); %>
+          </div>
+          <div class="error-message" id="rating-error" style="display: none;">
+            Пожалуйста, выберите оценку.
+          </div>
+          
+          <label for="photo">Прикрепить фотографии (не более 5):</label>
+          <div class="file-upload">
+            <button
+              type="button"
+              onclick="document.getElementById('photo').click()"
+              class="upload-button"
+            >
+              <i class="bi bi-images"></i> Выбрать файлы
+            </button>
+            <input
+              type="file"
+              id="photo"
+              name="photos"
+              accept="image/*"
+              class="input-field form-control"
+              style="display: none"
+              multiple
+            />
+            <div id="file-list">
+              <% if (review.ReviewRoutePhotos) { %>
+                <% review.ReviewRoutePhotos.forEach(photo => { %>
+                  <img class="existingPhoto" src="/uploads/<%= photo.path %>" alt="Photo" />
+                <% }); %>
+              <% } %>
+            </div>
+          </div>
+          <div class="error-message" id="photo-error" style="display: none; margin-top: 5px;">
+            Вы можете загрузить не более 5 фотографий.
+          </div>
+
+          <label for="message">Сообщение:</label>
+          <textarea
+          id="message"
+          name="reviewsRouteForm[message]"
+          class="input-field form-control"
+          rows="4"
+          required
+        ><%= review.message %></textarea>
+        
+          <div class="error-message" id="message-error">
+            Пожалуйста, напишите комментарий.
+          </div>
+
+          <input
+            type="submit"
+            value="Изменить"
+            class="cta-button animate__animated"
+          />
+        </form>
+      </div>
+    </main>
+    <%- include("./partials/footer") %> <%- include("./partials/script") %>
+    <script src="/js/reviewsRoute.js"></script>
+  </body>
+</html>

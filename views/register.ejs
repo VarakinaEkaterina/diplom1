@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <%- include("./partials/head") %>
+  <link rel="stylesheet" href="/css/register.css" />
+
+  <body class="page-container">
+    <%- include("./partials/header") %>
+    <main class="content">
+      <div class="form-container">
+        <h2>Регистрация</h2>
+        <form id="dataForm" action="/profile/register" method="POST" novalidate>
+          <label for="name">Имя:</label>
+          <input
+            type="text"
+            id="name"
+            name="dataForm[name]"
+            class="input-field form-control"
+            value="<%= formData.name || '' %>"
+            required
+          />
+          <div class="error-message" id="name-error">Введите ваше имя</div>
+
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="dataForm[email]"
+            class="input-field form-control"
+            value="<%= formData.email || '' %>"
+            required
+          />
+          <div class="error-message" id="email-error">
+            Введите действующий адрес электронной почты
+          </div>
+          <% if (validationError) { %>
+          <p class="text-danger"><%= validationError.message %></p>
+          <% } %>
+
+          <label for="password" class="form-label">Пароль</label>
+          <input
+            type="password"
+            class="input-field form-control"
+            id="password"
+            name="dataForm[password]"
+            required
+          />
+          <div class="error-message" id="password-error">
+            Ваш пароль должен содержать минимум 6 символов.
+          </div>
+
+          <label for="confirm_password" class="form-label"
+            >Подтверждение пароля</label
+          >
+          <input
+            type="password"
+            class="input-field form-control"
+            id="confirm_password"
+            name="dataForm[confirm_password]"
+            required
+          />
+          <div class="error-message" id="confirm_password-error">
+            Пароли не совпадают
+          </div>
+
+          <label for="age" class="form-label">Возраст</label>
+          <input
+            type="number"
+            class="input-field form-control"
+            id="age"
+            name="dataForm[age]"
+            value="<%= formData.age || '' %>"
+            required
+          />
+          <div class="error-message" id="age-error">
+            Возраст должен быть не менее 14 лет
+          </div>
+
+          <b>Согласие на обработку персональных данных:</b>
+          <label for="agree">
+            <div class="check">
+              <input
+                type="checkbox"
+                id="agree"
+                name="dataForm[agree]"
+                class="check1 input-field"
+              />Согласен
+            </div>
+          </label>
+          <div class="error-message" id="agree-error">Подтвердите согласие</div>
+
+          <input
+            type="submit"
+            value="Зарегистрироваться"
+            class="cta-button animate__animated"
+          />
+        </form>
+      </div>
+    </main>
+    <%- include("./partials/footer") %> <%- include("./partials/script") %>
+    <script src="/js/register.js"></script>
+  </body>
+</html>

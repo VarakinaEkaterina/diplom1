@@ -1,0 +1,128 @@
+html,
+body {
+  font-family: "Montserrat", Arial;
+  font-weight: 800;
+  background-color: #fafafa;
+  height: 100%;
+  margin: 0;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
+.card {
+  border: 2px solid #ddd;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  position: relative;
+}
+
+.card img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.card-content {
+  display: flex;
+}
+
+.card-description {
+  flex: 1;
+}
+
+.card-description p {
+  color: rgb(66, 66, 66);
+  font-weight: 600;
+}
+
+.card-routes {
+  margin-left: 20px;
+  flex: 1;
+}
+
+.like-button {
+  cursor: pointer;
+  height: 30px;
+  border: none;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  position: relative;
+  margin: 5px;
+}
+
+.card-routes ul {
+  list-style: none;
+  padding: 0;
+}
+
+.bi-suit-heart-fill {
+  color: rgb(98, 98, 98);
+  font-size: 30px;
+}
+
+.bi-suit-heart-fill:hover {
+  color: rgb(255, 0, 0);
+}
+
+.red-heart {
+  color: red;
+}
+
+.add {
+  border: none;
+  background-color: #ffffff00;
+}
+
+.bi-plus-square-fill {
+  color: rgb(98, 98, 98);
+  font-size: 45px;
+  margin: 5px;
+}
+
+.bi-plus-square-fill:hover {
+  color: #ffa400;
+}
+
+.addDiv {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button-link {
+  background-color: #ffa400;
+  border: 3px solid #ffa400;
+  border-radius: 3px;
+  width: 300px;
+  height: 35px;
+  transition: background-color 0.3s;
+}
+
+.button-link:hover {
+  background-color: white;
+}
+
+.button-link a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.button-link a:hover {
+  color: #ffa400;
+}

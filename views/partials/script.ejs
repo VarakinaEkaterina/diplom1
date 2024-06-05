@@ -1,0 +1,22 @@
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/wow.min.js"></script>
+<script src="/scripts/@popperjs/core/dist/umd/popper.min.js"></script>
+<script src="/scripts/tippy.js/dist/tippy-bundle.umd.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Получаем все кнопки с классом cta-button
+    const buttons = document.querySelectorAll(".cta-button");
+
+    // Добавляем обработчик событий ко всем кнопкам
+    buttons.forEach(function (button) {
+      button.addEventListener("mouseenter", function () {
+        this.classList.add("animate__pulse");
+      });
+
+      button.addEventListener("mouseleave", function () {
+        this.classList.remove("animate__pulse");
+      });
+    });
+  });
+</script>

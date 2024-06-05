@@ -1,0 +1,173 @@
+html,
+body {
+  font-family: "Montserrat", Arial;
+  font-weight: 800;
+  height: 100%;
+  margin: 0;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.form-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+h2 {
+  text-align: center;
+}
+
+input[type="text"],
+input[type="email"],
+.select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.invalid.animate__animated.animate__shakeX {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  display: none;
+  font-size: 0.8em;
+  margin-top: -15px;
+  margin-bottom: 10px;
+}
+
+input[type="submit"] {
+  background-color: #ffffff;
+  border: solid 3px #ffa400;
+  color: #ffa400;
+  padding: 10px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+input[type="submit"]:hover {
+  border: solid 3px #fff;
+  color: white;
+  background-color: #ffa400;
+}
+
+.rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+
+.rating > input {
+  display: none;
+}
+
+.rating > label {
+  position: relative;
+  width: 1em;
+  font-size: 35px;
+  color: #e3e3e3;
+  cursor: pointer;
+}
+
+.rating > label:hover,
+.rating > label:hover ~ label,
+.rating > input:checked ~ label {
+  color: #ffa400;
+}
+
+.upload-button {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.upload-button:hover {
+  background-color: #e3e3e3;
+}
+
+.upload-button .bi {
+  margin-right: 10px;
+  font-size: 24px;
+}
+
+#file-list {
+  margin-top: 10px;
+}
+
+#file-list div {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  background-color: #ffffff;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: red;
+  font-size: 16px;
+}
+
+.delete-button:hover {
+  color: darkred;
+}
+
+.file-item {
+  margin-bottom: 5px;
+}
+
+.input-field:not(:checked):not(:focus) {
+  color: grey;
+}
+
+.existingPhoto {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  margin: 10px;
+  margin-left: 0;
+  object-fit: cover;
+}

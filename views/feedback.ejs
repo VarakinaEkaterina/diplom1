@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <%- include("./partials/head") %>
+  <link rel="stylesheet" href="/css/feedback.css" />
+
+  <body class="page-container">
+    <%- include("./partials/header") %>
+    <main class="content">
+      <div class="form-container">
+        <h2>Форма обратной связи</h2>
+        <form
+          id="feedbackForm"
+          action="/contacts/feedback"
+          method="POST"
+          novalidate
+        >
+          <label for="name">Ваше имя:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="input-field form-control"
+            autocomplete="name"
+            required
+          />
+          <div class="error-message" id="name-error">
+            Пожалуйста, введите ваше имя.
+          </div>
+
+          <label for="email">Ваш email:</label>
+          <input
+            type="text"
+            id="email"
+            name="email"
+            class="input-field form-control"
+            autocomplete="email"
+            required
+          />
+          <div class="error-message" id="email-error">
+            Пожалуйста, введите действующий адрес электронной почты.
+          </div>
+
+          <label>Ваша оценка:</label>
+          <div class="rating">
+            <input type="radio" id="star5" name="rating" value="5" /><label
+              for="star5"
+              >★</label
+            >
+            <input type="radio" id="star4" name="rating" value="4" /><label
+              for="star4"
+              >★</label
+            >
+            <input type="radio" id="star3" name="rating" value="3" /><label
+              for="star3"
+              >★</label
+            >
+            <input type="radio" id="star2" name="rating" value="2" /><label
+              for="star2"
+              >★</label
+            >
+            <input type="radio" id="star1" name="rating" value="1" /><label
+              for="star1"
+              >★</label
+            >
+          </div>
+
+          <label for="message">Сообщение:</label>
+          <textarea
+            id="message"
+            name="message"
+            class="input-field form-control"
+            rows="4"
+            required
+          ></textarea>
+          <div class="error-message" id="message-error">
+            Пожалуйста, введите ваше сообщение.
+          </div>
+
+          <input
+            type="submit"
+            value="Отправить"
+            class="cta-button animate__animated"
+          />
+        </form>
+      </div>
+    </main>
+    <%- include("./partials/footer") %> <%- include("./partials/script") %>
+    <script src="/js/feedback.js"></script>
+  </body>
+</html>

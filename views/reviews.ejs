@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <%- include("./partials/head") %>
+  <link rel="stylesheet" href="/css/contacts.css" />
+
+  <body class="page-container">
+    <%- include("./partials/header") %>
+    <main class="content">
+      <div class="container">
+        <h2>Что бы вы хотели оценить?</h2>
+        <p>Нажмите на кнопку</p>
+        <a
+          href="/reviews/reviewsAttraction"
+          target="_blank"
+          class="a cta-button animate__animated"
+          >Достопримечательность</a
+        >
+        <a
+          href="/reviews/reviewsRoutes"
+          target="_blank"
+          class="a cta-button animate__animated"
+          >Маршрут</a
+        >
+      </div>
+    </main>
+    <%- include("./partials/footer") %> <%- include("./partials/script") %>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <%- include("./partials/head") %>
+  <link rel="stylesheet" href="/css/newLandmark.css" />
+
+  <body class="page-container">
+    <%- include("./partials/header") %>
+    <main class="content">
+      <div class="form-container">
+        <h2 style="margin-bottom: 20px">Добавить запись</h2>
+        <form
+          id="newLandmarksForm"
+          action="/newLandmarks"
+          enctype="multipart/form-data"
+          method="POST"
+          novalidate
+        >
+          <label for="name">Название достопримечательности:</label>
+          <input
+            type="text"
+            id="name"
+            name="newLandmarksForm[name]"
+            class="input-field form-control"
+            required
+          />
+          <div class="error-message" id="name-error">
+            Пожалуйста, введите название.
+          </div>
+
+          <label for="type">Тип:</label>
+          <select
+            id="type"
+            name="newLandmarksForm[type]"
+            class="select input-field form-control"
+          >
+            <option value="">Выберите тип достопримечательности</option>
+            <option value="type1">Здание (сооружение)</option>
+            <option value="type2">Музей</option>
+            <option value="type3">Памятник</option>
+            <option value="type4">Собор</option>
+            <option value="type5">Площадь</option>
+            <option value="type6">Парк</option>
+            <option value="type7">Библиотека</option>
+            <!-- Другие варианты -->
+          </select>
+          <div class="error-message" id="type-error">
+            Пожалуйста, введите тип достопримечательности.
+          </div>
+
+          <label for="description">Краткое описание:</label>
+          <input
+            type="text"
+            id="description"
+            name="newLandmarksForm[description]"
+            class="input-field form-control"
+            required
+          />
+          <div class="error-message" id="description-error">
+            Пожалуйста, введите описание.
+          </div>
+
+          <label for="descriptionFull">Полное описание:</label>
+          <textarea
+            id="descriptionFull"
+            rows="4"
+            name="newLandmarksForm[descriptionFull]"
+            class="input-field form-control"
+            required
+          ></textarea>
+          <div class="error-message" id="descriptionFull-error">
+            Пожалуйста, введите полное описание.
+          </div>
+          <label for="photo">Прикрепить фотографию:</label>
+          <div class="file-upload">
+            <button
+              type="button"
+              onclick="document.getElementById('photo').click()"
+              class="upload-button"
+            >
+              <i class="bi bi-images"></i> Выбрать фото
+            </button>
+            <input
+              type="file"
+              id="photo"
+              name="photo"
+              accept="image/*"
+              class="input-field form-control"
+              style="display: none"
+            />
+            <div id="file-list"></div>
+          </div>
+          <div class="error-message" id="photo-error" style="margin-top: 10px">
+            Пожалуйста, добавьте фотографию.
+          </div>
+
+          <input
+            type="submit"
+            value="Добавить"
+            class="cta-button animate__animated"
+          />
+        </form>
+      </div>
+    </main>
+    <%- include("./partials/footer") %> <%- include("./partials/script") %>
+    <script src="/js/newLandmarks.js"></script>
+  </body>
+</html>

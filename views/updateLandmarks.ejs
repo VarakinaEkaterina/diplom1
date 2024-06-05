@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <%- include("./partials/head") %>
+  <link rel="stylesheet" href="/css/newLandmark.css" />
+
+  <body class="page-container">
+    <%- include("./partials/header") %>
+    <main class="content">
+      <div class="form-container">
+        <h2 style="margin-bottom: 20px">Редактировать запись</h2>
+        <form
+          id="newLandmarksForm"
+          action="/edit/<%= landmarks.id %>"
+          enctype="multipart/form-data"
+          method="POST"
+          novalidate
+        >
+          <label for="name">Название достопримечательности:</label>
+          <input
+            type="text"
+            id="name"
+            name="newLandmarksForm[name]"
+            class="input-field form-control"
+            value="<%= landmarks.name %>"
+            required
+          />
+          <div class="error-message" id="name-error">
+            Пожалуйста, введите название.
+          </div>
+          <label for="type">Тип:</label>
+          <select id="type" name="newLandmarksForm[type]" class="select input-field form-control">
+              <option value="">Выберите тип достопримечательности</option>
+              <option value="type1" <%= landmarks.type === 'type1' ? 'selected' : '' %>>Здание (сооружение)</option>
+              <option value="type2" <%= landmarks.type === 'type2' ? 'selected' : '' %>>Музей</option>
+              <option value="type3" <%= landmarks.type === 'type3' ? 'selected' : '' %>>Памятник</option>
+              <option value="type4" <%= landmarks.type === 'type4' ? 'selected' : '' %>>Собор</option>
+              <option value="type5" <%= landmarks.type === 'type5' ? 'selected' : '' %>>Площадь</option>
+              <option value="type6" <%= landmarks.type === 'type6' ? 'selected' : '' %>>Парк</option>
+              <option value="type7" <%= landmarks.type === 'type7' ? 'selected' : '' %>>Библиотека</option>
+          </select>
+          <div class="error-message" id="type-error">
+            Пожалуйста, введите тип достопримечательности.
+          </div>
+
+          <label for="description">Краткое описание:</label>
+          <input
+            type="text"
+            id="description"
+            name="newLandmarksForm[description]"
+            class="input-field form-control"
+            value="<%= landmarks.description %>"
+            required
+          />
+          <div class="error-message" id="description-error">
+            Пожалуйста, введите описание.
+          </div>
+
+          <label for="descriptionFull">Полное описание:</label>
+          <textarea
+            id="descriptionFull"
+            rows="4"
+            name="newLandmarksForm[descriptionFull]"
+            class="input-field form-control"
+            required
+          >
+<%= landmarks.descriptionFull %></textarea
+          >
+          <div class="error-message" id="descriptionFull-error">
+            Пожалуйста, введите полное описание.
+          </div>
+          <label for="photo">Прикрепить фотографию:</label>
+          <div class="file-upload">
+            <button
+              type="button"
+              onclick="document.getElementById('photo').click()"
+              class="upload-button"
+            >
+              <i class="bi bi-images"></i> Выбрать фото
+            </button>
+            <input
+              type="file"
+              id="photo"
+              name="photo"
+              accept="image/*"
+              class="input-field form-control"
+              style="display: none"
+            />
+            <div id="file-list">
+              <img
+                class="existingPhoto"
+                src="/uploads/<%= landmarks.photo %>"
+                alt="Photo"
+              />
+            </div>
+          </div>
+          <div class="error-message" id="photo-error" style="margin-top: 10px">
+            Пожалуйста, добавьте фотографию.
+          </div>
+
+          <input
+            type="submit"
+            value="Изменить"
+            class="cta-button animate__animated"
+          />
+        </form>
+      </div>
+    </main>
+    <%- include("./partials/footer") %> <%- include("./partials/script") %>
+    <script src="/js/newLandmark1.js"></script>
+  </body>
+</html>
